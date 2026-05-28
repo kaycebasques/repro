@@ -1,0 +1,11 @@
+alias(
+    name = "sources",
+    actual = "//src:_src/_sources",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "preview",
+    actual = "//src:src.serve",
+    visibility = ["//visibility:public"],
+)
