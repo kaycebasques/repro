@@ -16,6 +16,7 @@ sphinx_build_binary(
     name = "sphinx",
     deps = [
         "@pypi//sphinx",
+        "//testmod",
     ],
     visibility = ["//visibility:public"],
 )
@@ -30,9 +31,6 @@ sphinx_docs(
     strip_prefix = "src/",
     deps = [
         ":content",
-	":extensions",
-	":static",
-	":templates",
     ],
     visibility = ["//visibility:public"],
     allow_persistent_workers = False,
