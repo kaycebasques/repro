@@ -1,3 +1,5 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
 alias(
     name = "sources",
     actual = "//src:_src/_sources",
@@ -9,3 +11,11 @@ alias(
     actual = "//src:src.serve",
     visibility = ["//visibility:public"],
 )
+
+py_library(
+    name = "testmod",
+    srcs = glob(["testmod/**/*.py"]),
+    visibility = ["//visibility:public"],
+    imports = ["."],
+)
+

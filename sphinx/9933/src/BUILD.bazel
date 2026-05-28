@@ -1,0 +1,54 @@
+load("@rules_python//sphinxdocs:sphinx.bzl", "sphinx_build_binary", "sphinx_docs")
+load("@rules_python//sphinxdocs:sphinx_docs_library.bzl", "sphinx_docs_library")
+
+package(default_visibility = ["//visibility:public"])
+
+sphinx_docs_library(
+    name = "content",
+    srcs = [
+        "index.rst",
+        "modules.rst",
+        "testmod.rst",
+    ],
+)
+
+sphinx_build_binary(
+    name = "sphinx",
+    deps = [
+        "@pypi//sphinx",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+sphinx_docs(
+    name = "src",
+    config = "conf.py",
+    formats = [
+        "html",
+    ],
+    sphinx = ":sphinx",
+    strip_prefix = "src/",
+    deps = [
+        ":content",
+	":extensions",
+	":static",
+	":templates",
+    ],
+    visibility = ["//visibility:public"],
+    allow_persistent_workers = False,
+    extra_opts = [
+        "--fail-on-warning",
+    ],
+)
+
+alias(
+    name = "ls",
+    actual = ":_src/_sources",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "serve",
+    actual = ":src.serve",
+    visibility = ["//visibility:public"],
+)

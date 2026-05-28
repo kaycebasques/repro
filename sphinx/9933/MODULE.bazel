@@ -1,3 +1,4 @@
+module(name = "sphinx_repro")
 bazel_dep(name = "rules_python", version = "1.9.0")
 
 python = use_extension("@rules_python//python/extensions:python.bzl", "python")
